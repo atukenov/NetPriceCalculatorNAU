@@ -13,11 +13,10 @@
 /* NAU Logo */
 
 img.NAU_logo {
-	position: fixed;
 	width: 300px;
 	height: auto;
-	top: 700px;
-	margin-left: 18%;
+	margin-top: 650px;
+	margin-left: 250px;
 }
 
 /* deck-container */
@@ -155,7 +154,7 @@ body, html {
 	display: none;
 	color:#fff;
 	text-align:left;
-	font-size:12px;
+	font-size:10px;
 	z-index: 5;
 	font-weight: bold;
 	
