@@ -1,0 +1,510 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<!-- IDK what this is <meta http-equiv="X-UA-Compatible" content="IE=edge: ,chrome=1"> -->
+		
+        <title>North American College Net Price Calculator</title>
+		
+		<link rel="stylesheet" href="lib/deck/core/deck.core.css">
+		<link rel="stylesheet" id="style-theme-link" href="lib/deck/themes/style/web-2.0.css">
+		<link rel="stylesheet" id="transition-theme-link" href="lib/deck/themes/transition/horizontal-slide.css">
+		<link rel="stylesheet" href="lib/deck/extensions/navigation/deck.navigation.css">
+		<link rel="stylesheet" href="style.css">
+		
+		
+		<script type="text/javascript" src="lib/deck/jquery-1.6.4.min.js"></script>
+		<script type="text/javascript" src="lib/deck/modernizr.custom.js"></script>
+		<script type="text/javascript" src="lib/deck/core/deck.core.js"></script>
+		<script type="text/javascript" src="lib/deck/extensions/navigation/deck.navigation.js"></script>
+		<script type="text/javascript" src="lib/jquery-validation/jquery.validate.min.js"></script>
+		
+		<script type="text/javascript" src="js/form_info.js"></script>
+		<script type="text/javascript" src="js/form_dynamics.js"></script>
+		<script type="text/javascript" src="js/efc.js"></script>
+		<script type="text/javascript" src="js/pell.js"></script>
+		<script type="text/javascript" src="js/nac_aid.js"></script>
+		<script type="text/javascript" src="js/calculator.js"></script>
+		
+		<script type="text/javascript">
+			
+			$(document).ready(function(){
+				
+				var navigation_prev_html = 
+					'<span class="deck-prev-link" title="Previous">&#8592; back</span>'
+					+ '<div style="clear:both;"></div>';
+				var navigation_next_html = 
+					'<span class="deck-next-link" title="Next">continue &#8594;</span>';
+				var slides = $('.slide');
+				slides.prepend(navigation_prev_html);
+				slides.append(navigation_next_html);
+				
+//				$('h2').after('<div style="clear:both;"></div>');
+				
+				$('#slide-results table tr td:nth-child(2)').attr('align','right');
+				
+				$('form').validate();
+				
+				$.deck.defaults.keys = {};
+				$.deck('.slide');
+				
+				
+			});
+		</script>
+    </head>
+    <body class="deck-container">
+    	
+		<!--
+		<div class="deck-prev-link" title="Previous">&#8592; back</div>
+		<div class="deck-next-link" title="Next">continue &#8594;</div>
+		-->
+		
+		<div class="slide" id="slide-welcome">
+			
+			<div class="deck-title">
+				<h1>Welcome to the NAC Net Price Calculator!</h1>
+				
+				<div class="disclaimer">
+					<b>Disclaimer:</b>
+					While our IT Department and Financial Aid Office staff are collaborating
+					to provide the
+					most useful NAC Net Price Calculator,
+					please keep in mind that the results of this calculator are only estimates
+					and neither represent actual awards nor guarantee any amount of actual financial
+					assistance.
+					Students must complete and submit a Free Application for Federal Student Aid (FAFSA)
+					to qualify for or receive an actual financial aid award that includes federal
+					grants, loans, or work-study assistance under Title IV.
+				</div>
+				
+			</div>
+			
+		</div>
+		
+		<div class="slide" id="slide-general1">
+			<h2>Step 1 of 5: General information</h2>
+			
+			
+			<form action="" id="slide-general1-form">
+				<p class="form-instructions">
+					Please answer all of the following questions.
+				</p>
+				
+				
+				<p>
+					<label for="i-nationality">Is the student a citizen or permanent resident of the United States?</label>
+					<select id="i-nationality" name="nationality" class="required">
+						<option value="">-Select-</option>
+						<option value="US">Yes</option>
+						<option value="international">No</option>
+					</select>
+				</p>
+				
+				<p>
+					<label for="i-housing">Select a housing arrangement for the student.</label>
+					<select id="i-housing" name="housing">
+						<option value="oncampus">on-campus housing</option>
+						<option value="offcampus">off-campus housing</option>
+						<option value="other">with parents</option>
+					</select> 
+				</p>
+				
+				<p class="US">
+					<label for="i-state">What is the student's state of residence?</label>
+					<select id="i-state" name="state" class="required">
+						<option value="">-Select-</option>
+						<option value="AL">Alabama</option>
+						<option value="AK">Alaska</option>
+						<option value="AZ">Arizona</option>
+						<option value="AR">Arkansas</option>
+						<option value="CA">California</option>
+						<option value="CO">Colorado</option>
+						<option value="CT">Connecticut</option>
+						<option value="DE">Delaware</option>
+						<option value="DC">District of Columbia</option>
+						<option value="FL">Florida</option>
+						<option value="GA">Georgia</option>
+						<option value="HI">Hawaii</option>
+						<option value="ID">Idaho</option>
+						<option value="IL">Illinois</option>
+						<option value="IN">Indiana</option>
+						<option value="IA">Iowa</option>
+						<option value="KS">Kansas</option>
+						<option value="KY">Kentucky</option>
+						<option value="LA">Louisiana</option>
+						<option value="ME">Maine</option>
+						<option value="MD">Maryland</option>
+						<option value="MA">Massachusetts</option>
+						<option value="MI">Michigan</option>
+						<option value="MN">Minnesota</option>
+						<option value="MS">Mississippi</option>
+						<option value="MO">Missouri</option>
+						<option value="MT">Montana</option>
+						<option value="NE">Nebraska</option>
+						<option value="NV">Nevada</option>
+						<option value="NH">New Hampshire</option>
+						<option value="NJ">New Jersey</option>
+						<option value="NM">New Mexico</option>
+						<option value="NY">New York</option>
+						<option value="NC">North Carolina</option>
+						<option value="ND">North Dakota</option>
+						<option value="OH">Ohio</option>
+						<option value="OK">Oklahoma</option>
+						<option value="OR">Oregon</option>
+						<option value="PA">Pennsylvania</option>
+						<option value="RI">Rhode Island</option>
+						<option value="SC">South Carolina</option>
+						<option value="SD">South Dakota</option>
+						<option value="TN">Tennessee</option>
+						<option value="TX">Texas</option>
+						<option value="UT">Utah</option>
+						<option value="VT">Vermont</option>
+						<option value="VA">Virginia</option>
+						<option value="WA">Washington</option>
+						<option value="WV">West Virginia</option>
+						<option value="WI">Wisconsin</option>
+						<option value="WY">Wyoming</option>
+						<option value="other">Other</option>
+					</select>
+				</p>
+				
+				<p class="US">
+					<label for="i-parents">Which of the student's parents (biological or otherwise) are part of the student's household?</label>
+					<select id="i-parents" name="parents" class="required">
+						<option value="">-Select-</option>
+						<option value="none">Neither (student is independent)</option>
+						<option value="mother">Mother</option>
+						<option value="father">Father</option>
+						<option value="both">Both mother and father</option>
+					</select>
+				</p>
+				
+				
+				<p class="US">
+					What is the student's birthday?<br/>
+					<label for="i-birthMonth" style="width:4em;float:left;">Month:</label>
+					<select id="i-birthMonth" name="birthMonth" class="birth required">
+						<option value="">-Select month-</option>
+						<option value="0">January</option>
+						<option value="1">February</option>
+						<option value="2">March</option>
+						<option value="3">April</option>
+						<option value="4">May</option>
+						<option value="5">June</option>
+						<option value="6">July</option>
+						<option value="7">August</option>
+						<option value="8">September</option>
+						<option value="9">October</option>
+						<option value="10">November</option>
+						<option value="11">December</option>
+					</select>
+					<br/>
+					<label for="i-birthDay" style="width:4em; float:left;">Day: </label>
+					<input type="text" id="i-birthDay" name="birthDay" class="birth required number" min="1" max="31" style="display:inline; width:3em;" maxlength="2">
+					<br/>
+					<label for="i-birthYear" style="width:4em; float:left;">Year: </label>
+					<input type="text" id="i-birthYear" name="birthYear" class="birth required number" min="1800" max="2012" style="display:inline; width:5em;">
+				</p>
+				
+				<p class="US">
+					<label for="i-marital">What is the student's marital status?</label>
+					<select id="i-marital" name="marital" class="required">
+						<option value="">-Select-</option>
+						<option value="never">Never married</option>
+						<option value="married">Married</option>
+						<option value="separated">Separated</option>
+						<option value="divorced">Divorced</option>
+					</select>
+				</p>
+				
+				<p class="US">
+					<label for="i-checkChildren">
+						<input type="checkbox" id="i-checkChildren">
+						Check this box if the student has one or more children receiving more than half of their support from the student.
+					</label>
+				</p>
+				
+				<p class="US">
+					<label for="i-checkMilitary">
+						<input type="checkbox" id="i-checkMilitary">
+						Check this box if any of the following are true:
+						<ul class="US">
+							<li>The student is currently serving on active duty in the U.S. Armed Forces.</li>
+							<li>The student is the National guard or Reserves enlistee called into federal active duty for other than training purposes.</li>
+							<li>The student is a veteran of the U.S. Armed Forces.</li>
+						</ul>
+					</label>
+				</p>
+					
+				
+				
+			</form>
+		</div>
+		
+		<div class="slide" id="slide-general2">
+			<h2>Step 2 of 5: Household circumstances</h2>
+			
+			<form action="" class="US">
+				
+				<p class="independent">
+					<label for="i-checkDependents">
+						<input type="checkbox" id="i-checkDependents">
+						Check this box if the student supports any dependents other than a spouse.
+					</label>
+				</p>
+				
+				<p>
+					<label for="i-nHouseholdMember">number of members in household</label>
+					<input type="text" id="i-nHouseholdMember" name="nHouseholdMember" class="required number">
+				</p>
+				
+				<p>
+					<label for="i-nInCollege">number of household members in college</label>
+					<input type="text" id="i-nInCollege" name="nInCollege" class="required number" minlength="1">
+				</p>
+				
+				<p class="dependent">
+					<label for="i-olderParentAge">age of older parent</label>
+					<input type="text" id="i-olderParentAge" name="olderParentAge" class="required number" minlength="1">
+				</p>
+				
+				<p class="spouse independent">
+					<label for="i-spouseEnroll">
+						<input type="checkbox" id="i-spouseEnroll">
+						Check this box if the student's spouse will be enrolled in college for at least half the time the student will be.
+					</label>
+				</p>
+				
+			</form>
+			
+			<div class="international">
+				Because you are not a citizen or permanent resident of the United States, you can skip this step.
+			</div>
+			
+		</div>
+		
+		<div class="slide" id="slide-parents">
+			<h2>Step 3 of 5: Parent financial information</h2>
+			
+			<form action="" class="US dependent">
+				<table>
+					<tr>
+						<td width="50%">
+							<h3>Incomes and taxes</h3>
+							
+							<p class="father">
+								<label for="i-fatherWorkIncome">father's income from work</label>
+								<input type="text" id="i-fatherWorkIncome" name="fatherWorkIncome" class="required number" minlength="1">
+							</p>
+							<p class="mother">
+								<label for="i-motherWorkIncome">mother's income from work</label>
+								<input type="text" id="i-motherWorkIncome" name="motherWorkIncome" class="required number" minlength="1">
+							</p>
+							<p>
+								<label for="i-parentAgi">adjusted gross income</label>
+								<input type="text" id="i-parentAgi" name="parentAgi" class="required number" minlength="1">
+							</p>
+							<p>
+								<label for="i-parentUntaxed">total untaxed income and benefits</label>
+								<input type="text" id="i-parentUntaxed" name="parentUntaxed" class="required number" minlength="1">
+							</p>
+							<p>
+								<label for="i-parentAdditional">additional financial information</label>
+								<input type="text" id="i-parentAdditional" name="parentAdditional" class="required number" minlength="1">
+							</p>
+							<p>
+								<label for="i-parentIncomeTax">income tax paid for 2010</label>
+								<input type="text" id="i-parentIncomeTax" name="parentIncomeTax" class="required number" minlength="1">
+							</p>
+						</td>
+						<td width="50%">
+							<h3>Assets</h3>
+							
+							<p>
+								<label for="i-parentRegularAssets">total assets in cash and savings or checking accounts</label>
+								<input type="text" id="i-parentRegularAssets" name="parentRegularAssets" class="required number" minlength="1">
+							</p>
+							<p>
+								<label for="i-parentInvestments">net worth of investments: , not including home</label>
+								<input type="text" id="i-parentInvestments" name="parentInvestments" class="required number" minlength="1">
+							</p>
+							<p>
+								<label for="i-parentBusinessesAndFarms">net worth of businesses and investment farms</label>
+								<input type="text" id="i-parentBusinessesAndFarms" name="parentBusinessesAndFarms" class="required number" minlength="1">
+							</p>
+						</td>
+					</tr>
+				</table>
+			</form>
+			
+			<div class="independent US">
+				Because the student has been classified as independent, you can skip this step.
+			</div>
+			
+			<div class="international">
+				Because the student is not a citizen or permanent resident of the United States, you can skip this step.
+			</div>
+		</div>
+		
+		<div class="slide" id="slide-student">
+			<h2>Step 4 of 5: Student <span class="spouse independent US">and spouse</span> financial information</h2>
+			
+			<form action="" class="US">
+				<table>
+					<tr>
+						<td width="50%">
+							<h3>Incomes and taxes</h3>
+							<p>
+								<label for="i-studentWorkIncome"><span class="nospouse">student </span>income from work</label>
+								<input type="text" id="i-studentWorkIncome" name="studentWorkIncome" class="required number" minlength="1">
+							</p>
+							<p class="spouse independent US">
+								<label for="i-spouseWorkIncome">spouse income from work</label>
+								<input type="text" id="i-spouseWorkIncome" name="spouseWorkIncome" class="required number" minlength="1">
+							</p>
+							<p>
+								<label for="i-studentAgi"><span class="spouse independent US">student and spouse </span>adjusted gross income</label>
+								<input type="text" id="i-studentAgi" name="studentAgi" class="required number" minlength="1">
+							</p>
+							<p>
+								<label for="i-studentUntaxed">total untaxed income and benefits</label>
+								<input type="text" id="i-studentUntaxed" name="studentUntaxed" class="required number" minlength="1">
+							</p>
+							<p>
+								<label for="i-studentAdditional">total additional financial information</label>
+								<input type="text" id="i-studentAdditional" name="studentAdditional" class="required number" minlength="1">
+							</p>
+							<p>
+								<label for="i-studentIncomeTax">income tax paid for 2010</label>
+								<input type="text" id="i-studentIncomeTax" name="studentIncomeTax" class="required number" minlength="1">
+							</p>
+						</td>
+						<td width="50%">
+							<h3>Assets</h3>
+							<p>
+								<label for="i-studentRegularAssets">Total assets in cash and savings or checking accounts</label>
+								<input type="text" id="i-studentRegularAssets" name="studentRegularAssets" class="required number" minlength="1">
+							</p>
+							<p>
+								<label for="i-studentInvestments">Net worth of investments: , not including home</label>
+								<input type="text" id="i-studentInvestments" name="studentInvestments" class="required number" minlength="1">
+							</p>
+							<p>
+								<label for="i-studentBusinessesAndFarms">Net worth of businesses and investment farms</label>
+								<input type="text" id="i-studentBusinessesAndFarms" name="studentBusinessesAndFarms" class="required number" minlength="1">
+							</p>
+						</td>
+					</tr>
+				</table>	
+			</form>
+			
+			<div class="international">
+				Because you are not a citizen or permanent resident of the United States, you can skip this step.
+			</div>
+		</div>
+		
+		<div class="slide" id="slide-merit">
+			<h2>Step 5 of 5: Merit considerations</h2>
+			<form action="">
+				<h3>SAT and ACT scores</h3>
+				<p>
+					Enter the highest score the student has earned on the SAT or ACT, if applicable.
+				</p>
+				<p>
+					<label for="i-satScore">SAT score (math + critical reading)</label>
+					<input type="text" id="i-satScore" name="satScore" class="number" min="400" max="1600"/>
+				</p>
+				<p>
+					<label for="i-actScore">ACT composite score</label>
+					<input type="text" id="i-actScore" name="actScore" class="number" min="1" max="36"/>
+				</p>
+				
+				<h3>Other</h3>
+				
+				<p class="international">
+					<label for="i-checkNationalContest">
+						<input type="checkbox" id="i-checkNationalContest" name="checkNationalContest"/>
+						Check this box if the student has received an award in a national-level Olympiad.
+					</label> 
+				</p>
+				
+				<p>
+					<label for="i-internationalContest">Has the student ever received an award in an international competition?</label>
+					<select id="i-internationalContest" name="internationalContest">
+						<option value="no">No</option>
+						<option value="olympiad">Yes, in an international Olympiad</option>
+						<option value="other">Yes, in another international competition</option>
+					</select>
+				</p>
+				
+				<p class="US">
+					<label for="i-highSchoolClassTopPercent">
+						The student graduated in the top
+						<input type="text" id="i-highSchoolClassTopPercent" name="highSchoolClassTopPercent" class="number" min="1" max="100"/>
+						percent of his/her high school class.
+					</label>
+				</p>
+				<p class="international">
+					<label for="i-nationalExamTopPercent">
+						The student scored in the top
+						<input type="text" id="i-nationalExamTopPercent" name="nationalExamTopPercent" class="number" min="1" max="100"/>
+						percent on a national standardized exam.
+					</label>
+				</p>
+			</form>
+		</div>
+		
+		<div class="slide" id="slide-results">
+			<h2>Your calculated net price</h2>
+			
+			100 percent of North American College freshmen receive institutional grants.
+			
+			<table class="centered">
+				<tr id="tr-tuitionAndFees">
+					<td>tuition and fees</td>
+					<td></td>
+				</tr>
+				<tr id="tr-roomAndBoard">
+					<td>room and board</td>
+					<td></td>
+				</tr>
+				<tr id="tr-booksAndSupplies">
+					<td>books and supplies</td>
+					<td></td>
+				</tr>
+				<tr id="tr-transportationAndOther">
+					<td>transportation and other personal expenses</td>
+					<td></td>
+				</tr>
+				<tr id="tr-costOfAttendance" class="subtotal">
+					<td>cost of attendance</td>
+					<td></td>
+				</tr>
+				<tr id="tr-federalGrant" class="negative">
+					<td>federal grants</td>
+					<td></td>
+				</tr>
+				<tr id="tr-federalLoan" class="negative">
+					<td>federal loans</td>
+					<td></td>
+				</tr>
+				<tr id="tr-nacAid" class="negative">
+					<td>NAC scholarships and grants</td>
+					<td></td>
+				</tr>
+				<tr id="tr-familyContribution" class="negative">
+					<td>student/family contribution</td>
+					<td></td>
+				</tr>
+				<tr id="tr-netPrice" class="total">
+					<td>remaining need</td>
+					<td></td>
+				</tr>
+			</table>
+			
+		</div>
+		
+		
+    </body>
+</html>

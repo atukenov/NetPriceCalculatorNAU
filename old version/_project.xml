@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>NAC_NetPriceCalculator</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.aptana.ide.core.unifiedBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.aptana.ide.project.nature.web</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>lib/deck</name>
+			<type>2</type>
+			<location>C:/Users/Leon2/Documents/Aptana Studio Workspace/NAC_NetPriceCalculator/lib/deck</location>
+		</link>
+	</linkedResources>
+</projectDescription>

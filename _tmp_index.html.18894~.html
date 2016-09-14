@@ -1,0 +1,253 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<!-- IDK what this is <meta http-equiv="X-UA-Compatible" content="IE=edge: ,chrome=1"> -->
+		
+        <title>North American College Net Price Calculator</title>
+		
+		<link rel="stylesheet" href="lib/deck/core/deck.core.css">
+		<link rel="stylesheet" id="style-theme-link" href="lib/deck/themes/style/web-2.0.css">
+		<link rel="stylesheet" id="transition-theme-link" href="lib/deck/themes/transition/horizontal-slide.css">
+		<link rel="stylesheet" href="lib/deck/extensions/navigation/deck.navigation.css">
+		
+		<script type="text/javascript" src="lib/deck/jquery-1.6.4.min.js"></script>
+		<script type="text/javascript" src="lib/deck/modernizr.custom.js"></script>
+		<script type="text/javascript" src="lib/deck/core/deck.core.js"></script>
+		<script type="text/javascript" src="lib/deck/extensions/navigation/deck.navigation.js"></script>
+		
+		<script type="text/javascript" src="efc.js"></script>
+		
+		<script type="text/javascript">
+			function getFormInt(id_suffix) {
+				return parseInt($('#i-'+id_suffix).val());
+			}
+			function getState() {
+				return $('#i-state option:selected').val();
+			}
+			
+			$(document).ready(function(){
+				$.deck('.slide');
+				$('#testbutton').click(function(){
+					Efc.getEfc_regularWorksheetA();
+				});
+				$('#testbutton2').click(function(){
+					alert($('#i-state select option:selected').val());
+				});
+			});
+		</script>
+    </head>
+    <body class="deck-container">
+    	
+		
+		<a href="#" class="deck-prev-link" title="Previous">&#8592; previous</a>
+		<a href="#" class="deck-next-link" title="Next">next &#8594;</a>
+		
+		
+		<div class="slide" id="slide-welcome">
+			<h2 class="test">Welcome to the NAC Net Price Calculator!</h2>
+			
+			To-do list:
+			<ul>
+				<li>form ui</li>
+				<li>calculator</li>
+				<li>form validation</li>
+				<li>appearances</li>
+				<li>disclaimer</li>
+				<li>licensing</li>
+			</ul>
+			
+		<input type="button" id="testbutton" value="testbutton">
+		<input type="button" id="testbutton2" value="testbutton2">
+		</div>
+		
+		<div class="slide" id="slide-bio1">
+			<h2>Biographical information, part 1</h2>
+			<div class="form-item" id="i-state">
+				<span class="form-item-label">state of residence</span>
+				<select>
+					<option value="">-Select-</option>
+					<option value="AL">Alabama</option>
+					<option value="AK">Alaska</option>
+					<option value="AZ">Arizona</option>
+					<option value="AR">Arkansas</option>
+					<option value="CA">California</option>
+					<option value="CO">Colorado</option>
+					<option value="CT">Connecticut</option>
+					<option value="DE">Delaware</option>
+					<option value="DC">District of Columbia</option>
+					<option value="FL">Florida</option>
+					<option value="GA">Georgia</option>
+					<option value="HI">Hawaii</option>
+					<option value="ID">Idaho</option>
+					<option value="IL">Illinois</option>
+					<option value="IN">Indiana</option>
+					<option value="IA">Iowa</option>
+					<option value="KS">Kansas</option>
+					<option value="KY">Kentucky</option>
+					<option value="LA">Louisiana</option>
+					<option value="ME">Maine</option>
+					<option value="MD">Maryland</option>
+					<option value="MA">Massachusetts</option>
+					<option value="MI">Michigan</option>
+					<option value="MN">Minnesota</option>
+					<option value="MS">Mississippi</option>
+					<option value="MO">Missouri</option>
+					<option value="MT">Montana</option>
+					<option value="NE">Nebraska</option>
+					<option value="NV">Nevada</option>
+					<option value="NH">New Hampshire</option>
+					<option value="NJ">New Jersey</option>
+					<option value="NM">New Mexico</option>
+					<option value="NY">New York</option>
+					<option value="NC">North Carolina</option>
+					<option value="ND">North Dakota</option>
+					<option value="OH">Ohio</option>
+					<option value="OK">Oklahoma</option>
+					<option value="OR">Oregon</option>
+					<option value="PA">Pennsylvania</option>
+					<option value="RI">Rhode Island</option>
+					<option value="SC">South Carolina</option>
+					<option value="SD">South Dakota</option>
+					<option value="TN">Tennessee</option>
+					<option value="TX">Texas</option>
+					<option value="UT">Utah</option>
+					<option value="VT">Vermont</option>
+					<option value="VA">Virginia</option>
+					<option value="WA">Washington</option>
+					<option value="WV">West Virginia</option>
+					<option value="WI">Wisconsin</option>
+					<option value="WY">Wyoming</option>
+					<option value="other">Wyoming</option>
+				</select>
+			</div>
+			<div class="form-item">
+				<span class="form-item-label">parents</span>
+				<input type="checkbox" id="i-checkMother"> Mother
+				<input type="checkbox" id="i-checkFather"> Father
+			</div>
+		</div>
+		
+		<div class="slide" id="slide-bio2">
+			<h2>Biographical information, part 2</h2>
+			
+			<div class="form-item">
+				<span class="form-item-label">number of household members</span>
+				<input type="text" id="i-nHouseholdMember">
+			</div>
+			
+			
+			<div class="form-item">
+				<span class="form-item-label">number of household members in college</span>
+				<input type="text" id="i-nInCollege">
+			</div>
+			<div class="form-item" id="i-OlderParentAge">
+				<span class = "form-item-label">age of older parent</span>
+				<input type="text">
+			</div>
+			
+		</div>
+		
+		<div class="slide" id="slide-parents">
+			<h2>Parent financial information</h2>
+			
+			<h3>Incomes and taxes</h3>
+			
+			<div class="form-item">
+				<span class="form-item-label">father's income from work</span>
+				<input type="text" id="i-fatherWorkIncome">
+			</div>
+			<div class="form-item">
+				<span class="form-item-label">mother's income from work</span>
+				<input type="text" id="i-motherWorkIncome">
+			</div>
+			<div class="form-item">
+				<span class="form-item-label">parents' adjusted gross income</span>
+				<input type="text" id="i-parentAgi">
+			</div>
+			<div class="form-item">
+				<span class="form-item-label">total untaxed income and benefits</span>
+				<input type="text" id="i-parentUntaxed">
+			</div>
+			<div class="form-item">
+				<span class="form-item-label">additional financial information</span>
+				<input type="text" id="i-parentAdditional">
+			</div>
+			<div class="form-item">
+				<span class="form-item-label">income tax paid for 2010</span>
+				<input type="text" id="i-parentIncomeTax">
+			</div>
+			
+			<h3>Assets</h3>
+			
+			<div class="form-item">
+				<span class="form-item-label">total assets in cash and savings or checking accounts</span>
+				<input type="text" id="i-parentRegularAssets">
+			</div>
+			<div class="form-item">
+				<span class="form-item-label">net worth of investments: , not including home</span>
+				<input type="text" id="i-parentInvestments">
+			</div>
+			<div class="form-item">
+				<span class="form-item-label">net worth of businesses and investment farms</span>
+				<input type="text" id="i-parentBusinessesAndFarms">
+			</div>
+			
+		</div>
+		
+		<div class="slide" id="slide-student">
+			<h2>Student financial information</h2>
+			
+			<h3>Incomes and taxes</h3>
+			
+			<div class="form-item">
+				<span class="form-item-label">income from work</span>
+				<input type="text" id="i-studentWorkIncome">
+			</div>
+			<div class="form-item">
+				<span class="form-item-label">adjusted gross income</span>
+				<input type="text" id="i-studentAgi">
+			</div>
+			<div class="form-item">
+				<span class="form-item-label">total untaxed income and benefits</span>
+				<input type="text" id="i-studentUntaxed">
+			</div>
+			<div class="form-item">
+				<span class="form-item-label">additional financial information</span>
+				<input type="text" id="i-studentAdditional">
+			</div>
+			<div class="form-item">
+				<span class="form-item-label">income tax paid for 2010</span>
+				<input type="text" id="i-studentIncomeTax">
+			</div>
+			
+			<h3>Assets</h3>
+			
+			<div class="form-item">
+				<span class="form-item-label">Total assets in cash and savings or checking accounts</span>
+				<input type="text" id="i-studentRegularAssets">
+			</div>
+			<div class="form-item">
+				<span class="form-item-label">Net worth of investments: , not including home</span>
+				<input type="text" id="i-studentInvestments">
+			</div>
+			<div class="form-item">
+				<span class="form-item-label">Net worth of businesses and investment farms</span>
+				<input type="text" id="i-studentBusinessesAndFarms">
+			</div>
+			
+		</div>
+		
+		
+		<div class="slide" id="slide-merit">
+			<h2>merit information</h2>
+		</div>
+		
+		<div class="slide" id="slide-results">
+			<h2>Your calculated net price</h2>
+		</div>
+		
+		
+    </body>
+</html>

@@ -1,0 +1,637 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<!-- IDK what this is <meta http-equiv="X-UA-Compatible" content="IE=edge: ,chrome=1"> -->
+		
+        <title>North American College Net Price Calculator</title>
+		
+		<link rel="stylesheet" href="lib/deck/core/deck.core.css">
+		<link rel="stylesheet" id="style-theme-link" href="lib/deck/themes/style/web-2.0.css">
+		<link rel="stylesheet" id="transition-theme-link" href="lib/deck/themes/transition/horizontal-slide.css">
+		<link rel="stylesheet" href="lib/deck/extensions/navigation/deck.navigation.css">
+		<link rel="stylesheet" href="style.css">
+		
+		
+		<script type="text/javascript" src="lib/deck/jquery-1.6.4.min.js"></script>
+		<script type="text/javascript" src="lib/deck/modernizr.custom.js"></script>
+		<script type="text/javascript" src="lib/deck/core/deck.core.js"></script>
+		<script type="text/javascript" src="lib/deck/extensions/navigation/deck.navigation.js"></script>
+		<script type="text/javascript" src="lib/jquery-validation/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="lib/flot/jquery.flot.min.js"></script>
+		<script type="text/javascript" src="lib/flot/jquery.flot.pie.min.js"></script>
+
+
+
+
+		
+		<script type="text/javascript" src="js/form_info.js"></script>
+		<script type="text/javascript" src="js/form_dynamics.js"></script>
+		<script type="text/javascript" src="js/efc.js"></script>
+		<script type="text/javascript" src="js/pell.js"></script>
+		<script type="text/javascript" src="js/nac_aid.js"></script>
+		<script type="text/javascript" src="js/calculator.js"></script>
+		<script type="text/javascript" src="js/tooltips.js"></script>
+		
+		<script type="text/javascript">
+			
+			$(document).ready(function(){
+				
+				
+				if ($.browser.msie && $.browser.version < 9) {
+					alert('It appears you are using an older version of Internet Explorer that may not display this calculator properly. Please conisder downloading one of the following browsers:\n Mozilla Firefox 7\n Google Chrome 16\n Opera 11\n Safari 5');
+				}
+				else if ($.browser.mozilla && $.browser.version < 5) {
+					alert('It appears you are using an older version of Firefox that may not display this calculator properly. Please conisder downloading one of the following browsers:\n Mozilla Firefox 7\n Google Chrome 16\n Opera 11\n Safari 5')
+				}
+				
+				
+				var navigation_prev_html = 
+					'<span class="deck-prev-link" title="Previous">&#8592; back</span>'
+					+ '<div style="clear:both;"></div>';
+				var navigation_next_html = 
+					'<span class="deck-next-link" title="Next">continue &#8594;</span>';
+				var slides = $('.slide');
+				slides.prepend(navigation_prev_html);
+				slides.append(navigation_next_html);
+				
+				$('.required').each( function() {
+					$('label.field-title[for=' + $(this).attr('id') + ']').append('<span class="required-star">*</span>');
+				});
+				$('.columns-container').append('<div class="end-columns"></div>');
+				
+				$('form').prepend('Please complete the following form fields.');
+				$('form').append('<div class="required-footnote"><span class="required-star">*</span>required field</div>');
+				
+				$('#slide-results table tr td:nth-child(2)').attr('align','right');
+				
+				$('#slide-general1 .coolbox').before('<div class="step-tracker">1/5</div>');
+				$('#slide-general2 .coolbox').before('<div class="step-tracker">2/5</div>');
+				$('#slide-parents .coolbox').before('<div class="step-tracker">3/5</div>');
+				$('#slide-student .coolbox').before('<div class="step-tracker">4/5</div>');
+				$('#slide-merit .coolbox').before('<div class="step-tracker">5/5</div>');
+				
+				$('.deck-container form').validate();
+				
+				
+				$.deck.defaults.keys = {};
+				$.deck('.slide');
+				
+				
+			});
+		</script>
+    </head>
+    <body class="deck-container">
+    	
+		<!--
+		<div class="deck-prev-link" title="Previous">&#8592; back</div>
+		<div class="deck-next-link" title="Next">continue &#8594;</div>
+		-->
+		
+		<div class="slide" id="slide-welcome">
+			
+			<div class="deck-title">
+				<div class="coolbox">
+					<h1>Welcome to the NAC Net Price Calculator!</h1>
+				</div>
+			</div>
+				
+			<div class="disclaimer">
+				<b>Disclaimer:</b>
+				While our IT Department and Financial Aid Office staff are collaborating
+				to provide the
+				most useful NAC Net Price Calculator,
+				please keep in mind that the results of this calculator are only estimates
+				and neither represent actual awards nor guarantee any amount of actual financial
+				assistance.
+				Students must complete and submit a Free Application for Federal Student Aid (FAFSA)
+				to qualify for or receive an actual financial aid award that includes federal
+				grants, loans, or work-study assistance under Title IV.
+			</div>
+			
+				
+			
+		</div>
+		
+		<div class="slide" id="slide-general1">
+			<h2>General information</h2>
+			
+			
+			<form action="" id="slide-general1-form" class="coolbox">
+				<div class="columns-container">
+					<div class="left-column">
+						<div class="form-field">
+							<label for="i-nationality" class="field-title">Nationality</label>
+							<label for="i-nationality" class="note">Is the student a citizen or permanent resident of the United States?</label>
+							<select id="i-nationality" name="nationality" class="required">
+								<option value="">-Select-</option>
+								<option value="US">Yes</option>
+								<option value="international">No</option>
+							</select>
+						</div>
+						
+						<div class="form-field">
+							<label for="i-housing" class="field-title">Housing</label>
+							<label for="i-housing" class="note"></label>
+							<select id="i-housing" name="housing" class="required">
+								<option value="">-Select-</option>
+								<option value="oncampus">On-campus housing</option>
+								<option value="offcampus">Off-campus housing</option>
+								<option value="other">With parents</option>
+							</select> 
+						</div>
+						
+						<div class="US form-field">
+							<label for="i-state" class="field-title">State</label>
+							<label for="i-state" class="note">What is the student's state of residence?</label>
+							<select id="i-state" name="state" class="required">
+								<option value="">-Select-</option>
+								<option value="AL">Alabama</option>
+								<option value="AK">Alaska</option>
+								<option value="AZ">Arizona</option>
+								<option value="AR">Arkansas</option>
+								<option value="CA">California</option>
+								<option value="CO">Colorado</option>
+								<option value="CT">Connecticut</option>
+								<option value="DE">Delaware</option>
+								<option value="DC">District of Columbia</option>
+								<option value="FL">Florida</option>
+								<option value="GA">Georgia</option>
+								<option value="HI">Hawaii</option>
+								<option value="ID">Idaho</option>
+								<option value="IL">Illinois</option>
+								<option value="IN">Indiana</option>
+								<option value="IA">Iowa</option>
+								<option value="KS">Kansas</option>
+								<option value="KY">Kentucky</option>
+								<option value="LA">Louisiana</option>
+								<option value="ME">Maine</option>
+								<option value="MD">Maryland</option>
+								<option value="MA">Massachusetts</option>
+								<option value="MI">Michigan</option>
+								<option value="MN">Minnesota</option>
+								<option value="MS">Mississippi</option>
+								<option value="MO">Missouri</option>
+								<option value="MT">Montana</option>
+								<option value="NE">Nebraska</option>
+								<option value="NV">Nevada</option>
+								<option value="NH">New Hampshire</option>
+								<option value="NJ">New Jersey</option>
+								<option value="NM">New Mexico</option>
+								<option value="NY">New York</option>
+								<option value="NC">North Carolina</option>
+								<option value="ND">North Dakota</option>
+								<option value="OH">Ohio</option>
+								<option value="OK">Oklahoma</option>
+								<option value="OR">Oregon</option>
+								<option value="PA">Pennsylvania</option>
+								<option value="RI">Rhode Island</option>
+								<option value="SC">South Carolina</option>
+								<option value="SD">South Dakota</option>
+								<option value="TN">Tennessee</option>
+								<option value="TX">Texas</option>
+								<option value="UT">Utah</option>
+								<option value="VT">Vermont</option>
+								<option value="VA">Virginia</option>
+								<option value="WA">Washington</option>
+								<option value="WV">West Virginia</option>
+								<option value="WI">Wisconsin</option>
+								<option value="WY">Wyoming</option>
+								<option value="other">Other</option>
+							</select>
+						</div>
+						
+						<div class="US form-field">
+							<label for="i-parents" class="field-title">Parents</label>
+							<label for="i-parents" class="note">Which of the student's parents (biological or otherwise) are part of the student's household?</label>
+							<select id="i-parents" name="parents" class="required">
+								<option value="">-Select-</option>
+								<option value="none">Neither (student is independent)</option>
+								<option value="mother">Mother</option>
+								<option value="father">Father</option>
+								<option value="both">Both mother and father</option>
+							</select>
+						</div>
+						
+						
+						<div class="US form-field">
+							<label for="i-checkChildren" class="field-title">Children</label>
+							<input type="checkbox" id="i-checkChildren">
+							<label for="i-checkChildren" class="checkbox">
+								Check this box if the student has one or more children receiving more than half of their support from the student.
+							</label>
+						</div>					
+					</div>
+					<div class="right-column">
+					
+						<div class="US form-field">
+							<label for="i-birthMonth" class="field-title">Birthday</label>
+							<label for="i-birthMonth" class="tablesque birthday">Month</label>
+							<select id="i-birthMonth" name="birthMonth" class="required">
+								<option value="">-Select month-</option>
+								<option value="0">January</option>
+								<option value="1">February</option>
+								<option value="2">March</option>
+								<option value="3">April</option>
+								<option value="4">May</option>
+								<option value="5">June</option>
+								<option value="6">July</option>
+								<option value="7">August</option>
+								<option value="8">September</option>
+								<option value="9">October</option>
+								<option value="10">November</option>
+								<option value="11">December</option>
+							</select>
+							<br/>
+							<label for="i-birthDay" class="tablesque birthday">Day</label>
+							<input type="text" id="i-birthDay" name="birthDay" class="required number" min="1" max="31" style="display:inline; width:3em;" maxlength="2">
+							<br/>
+							<label for="i-birthYear" class="tablesque birthday">Year</label>
+							<input type="text" id="i-birthYear" name="birthYear" class="required number" min="1800" max="2012" style="display:inline; width:4em;">
+						</div>
+						
+						<div class="US form-field">
+							<label for="i-marital" class="field-title">Student's marital status</label>
+							<select id="i-marital" name="marital" class="required">
+								<option value="">-Select-</option>
+								<option value="never">Never married</option>
+								<option value="married">Married</option>
+								<option value="separated">Separated</option>
+								<option value="divorced">Divorced</option>
+							</select>
+						</div>
+						
+						
+						<div class="US form-field">
+							<label for="i-checkMilitary" class="field-title">Military service</label>
+							<input type="checkbox" id="i-checkMilitary">
+							<label for="i-checkMilitary" class="checkbox">
+								Check this box if any of the following are true:
+								<ul class="US">
+									<li>The student is currently serving on active duty in the U.S. Armed Forces.</li>
+									<li>The student is the National guard or Reserves enlistee called into federal active duty for other than training purposes.</li>
+									<li>The student is a veteran of the U.S. Armed Forces.</li>
+								</ul>
+							</label>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<div class="slide" id="slide-general2">
+			<h2>Household circumstances</h2>
+			
+			<form action="" class="US coolbox">
+				
+				<div class="columns-container">
+					<div class="left-column">
+						
+			
+						<div class="form-field">
+							<label for="i-nHouseholdMember" class="field-title">Number of members in household</label>
+							<input type="text" id="i-nHouseholdMember" name="nHouseholdMember" class="required number">
+						</div>
+						
+						<div class="form-field">
+							<label for="i-nInCollege" class="field-title">Number of household members in college</label>
+							<input type="text" id="i-nInCollege" name="nInCollege" class="required number" minlength="1">
+						</div>
+						
+					</div>
+					<div class="right-column">
+						
+						<div class="dependent form-field">
+							<label for="i-olderParentAge" class="field-title">Age of older parent</label>
+							<input type="text" id="i-olderParentAge" name="olderParentAge" class="required number" minlength="1">
+						</div>
+						<div class="independent form-field">
+							<label for="i-checkDependents" class="field-title">Dependents</label>
+							<input type="checkbox" id="i-checkDependents">
+							<label for="i-checkDependents" class="checkbox"> 
+								Check this box if the student supports any dependents other than a spouse.
+							</label>
+						</div>
+						
+						<div class="spouse independent form-field">
+							<label for="i-spouseEnroll" class="field-title">Spouse enrollment</label>
+							<input type="checkbox" id="i-spouseEnroll" class="note">
+							<label for="i-spouseEnroll" class="checkbox">
+								Check this box if the student's spouse will be enrolled in college for at least half the time the student will be.
+							</label>
+						</div>
+					</div>
+				</div>
+				
+			</form>
+			
+			<div class="international coolbox">
+				Because the student is not a citizen or permanent resident of the United States, you can skip this step.
+			</div>
+			
+		</div>
+		
+		<div class="slide" id="slide-parents">
+			<h2>Parent financial information</h2>
+			
+			<form action="" class="US dependent coolbox">
+				<div class="columns-container">
+					<div class="left-column">
+						<h3>Incomes and taxes</h3>
+						
+						<div class="father form-field">
+							<label for="i-fatherWorkIncome" class="field-title">Father's income from work</label>
+							$<input type="text" id="i-fatherWorkIncome" name="fatherWorkIncome" class="required number" minlength="1">
+						</div>
+						<div class="mother form-field">
+							<label for="i-motherWorkIncome" class="field-title">Mother's income from work</label>
+							$<input type="text" id="i-motherWorkIncome" name="motherWorkIncome" class="required number" minlength="1">
+						</div>
+						<div class="form-field">
+							<label for="i-parentAgi" class="field-title">Adjusted gross income</label>
+							$<input type="text" id="i-parentAgi" name="parentAgi" class="required number" minlength="1"/>
+							<div class="tooltip">
+								<p>The adjusted gross income, or AGI, appears on
+									<ul>
+										<li>IRS Form 1040 line 37, or</li>
+										<li>IRS Form 1040A line 21, or</li>
+										<li>IRS Form 1040EZ line 4.</li>
+									</ul>
+								</p>
+								<p>
+									<input type="button" id="i-idkParentAgi" value="I don't know the parent AGI"/>
+								</p>
+							</div>
+						</div>
+						<div class="form-field">
+							<label for="i-parentUntaxed" class="field-title">Total untaxed income and benefits</label>
+							$<input type="text" id="i-parentUntaxed" name="parentUntaxed" class="required number" minlength="1">
+						</div>
+						<div class="form-field">
+							<label for="i-parentAdditional" class="field-title">FAFSA parent "Additional Financial Information"</label>
+							$<input type="text" id="i-parentAdditional" name="parentAdditional" class="required number" minlength="1">
+							<div class="tooltip">
+								<p>This amount is the total of FAFSA/SAR lines 91.a to 91.f:
+									<ol type="a">
+										<li>Education credits (American Opportunity, Hope or Lifetime Learning tax credits) from IRS Form 1040 line 49 or IRS Form 1040A line 31.</li>
+										<li>Child support paid because of divorce or separation or as a result of a legal requirement, not including support for children in parents' household.</li>
+										<li>Parents' taxable earnings from need-based employment programs, such as Federal Work-Study and need-based employment portions of fellowships and assistantships.</li>
+										<li>Parents' taxable student grant and scholarship aid reported to the IRS in parents' adjusted gross income. Includes AmeriCorps benefits (awards, living allowances and interest accrual payments), as well as grant and scholarship portions of fellowships and assistantships.</li>
+										<li>Parents' taxable combat pay or special combat pay.</li>
+										<li>Earnings from work under a cooperative education program offered by a college.</li>
+									</ol>
+								</p>
+								<p>
+									<input type="button" id="i-idkParentAdditional" value="I don't know the total parent FAFSA &quot;Additional Financial Information&quot;"/>
+								</p>
+							</div>
+						</div>
+						<div class="form-field">
+							<label for="i-parentIncomeTax" class="field-title">Income tax paid for 2010</label>
+							$<input type="text" id="i-parentIncomeTax" name="parentIncomeTax" class="required number" minlength="1">
+						</div>
+					</div>
+					<div class="right-column">
+						<h3>Assets</h3>
+						
+						<div class="form-field">
+							<label for="i-parentRegularAssets" class="field-title">Regular assets</label>
+							<label for="i-parentRegularAssets" class="note">Total assets in cash and savings or checking accounts</label>
+							$<input type="text" id="i-parentRegularAssets" name="parentRegularAssets" class="required number" minlength="1">
+						</div>
+						<div class="form-field">
+							<label for="i-parentInvestments" class="field-title">Investments</label>
+							<label for="i-parentInvestments" class="note">Net worth of investments, not including home</label>
+							$<input type="text" id="i-parentInvestments" name="parentInvestments" class="required number" minlength="1">
+						</div>
+						<div class="form-field">
+							<label for="i-parentBusinessesAndFarms" class="field-title">Businesses and farms</label>
+							<label for="i-parentBusinessesAndFarms" class="note">Net worth of businesses and investment farms</label>
+							$<input type="text" id="i-parentBusinessesAndFarms" name="parentBusinessesAndFarms" class="required number" minlength="1">
+						</div>
+					</div>
+				</div>
+			</form>
+			
+			<div class="independent US coolbox">
+				Because the student has been classified as independent, you can skip this step.
+			</div>
+			
+			<div class="international coolbox">
+				Because the student is not a citizen or permanent resident of the United States, you can skip this step.
+			</div>
+		</div>
+		
+		<div class="slide" id="slide-student">
+			<h2>Student <span class="spouse independent US">and spouse</span> financial information</h2>
+			
+			<form action="" class="US coolbox">
+				<div class="columns-container">
+					<div class="left-column">
+						<h3>Incomes and taxes</h3>
+						<div class="form-field">
+							<label for="i-studentWorkIncome" class="field-title"><span class="spouse">Student income</span><span class="nospouse">Income</span> from work</label>
+							$<input type="text" id="i-studentWorkIncome" name="studentWorkIncome" class="required number" minlength="1">
+						</div>
+						<div class="spouse independent US form-field">
+							<label for="i-spouseWorkIncome" class="field-title">Spouse income from work</label>
+							$<input type="text" id="i-spouseWorkIncome" name="spouseWorkIncome" class="required number" minlength="1">
+						</div>
+						<div class="form-field">
+							<label for="i-studentAgi" class="field-title"><span class="spouse">Student and spouse adjusted</span><span class="nospouse">Adjusted</span> gross income</label>
+							$<input type="text" id="i-studentAgi" name="studentAgi" class="required number" minlength="1">
+							<div class="tooltip">
+								<p>The adjusted gross income, or AGI, appears on
+									<ul>
+										<li>IRS Form 1040 line 37, or</li>
+										<li>IRS Form 1040A line 21, or</li>
+										<li>IRS Form 1040EZ line 4.</li>
+									</ul>
+								</p>
+								<p>
+									<input type="button" id="i-idkStudentAgi" value="I don't know the student AGI"/>
+								</p>
+							</div>
+						</div>
+						<div class="form-field">
+							<label for="i-studentUntaxed" class="field-title">Total untaxed income and benefits</label>
+							$<input type="text" id="i-studentUntaxed" name="studentUntaxed" class="required number" minlength="1">
+						</div>
+						<div class="form-field">
+							<label for="i-studentAdditional" class="field-title">FAFSA student "Additional Financial Information"</label>
+							$<input type="text" id="i-studentAdditional" name="studentAdditional" class="required number" minlength="1">
+							<div class="tooltip">
+								<p>This amount is the total of FAFSA/SAR lines 43.a to 43.f:
+									<ol type="a">
+										<li>Education credits (American Opportunity, Hope or Lifetime Learning tax credits) from IRS Form 1040 line 49 or IRS Form 1040A line 31.</li>
+										<li>Child support paid because of divorce or separation or as a result of a legal requirement, not including support for children in student's household.</li>
+										<li>Taxable earnings from need-based employment programs, such as Federal Work-Study and need-based employment portions of fellowships and assistantships.</li>
+										<li>Taxable student grant and scholarship aid reported to the IRS in the student's adjusted gross income. Includes AmeriCorps benefits (awards, living allowances and interest accrual payments), as well as grant and scholarship portions of fellowships and assistantships.</li>
+										<li>Student's taxable combat pay or special combat pay.</li>
+										<li>Earnings from work under a cooperative education program offered by a college.</li>
+									</ol>
+								</p>
+								<p>
+									<input type="button" id="i-idkStudentAdditional" value="I don't know the total parent FAFSA &quot;Additional Financial Information&quot;"/>
+								</p>
+							</div>
+						</div>
+						<div class="form-field">
+							<label for="i-studentIncomeTax" class="field-title">Income tax paid for 2010</label>
+							$<input type="text" id="i-studentIncomeTax" name="studentIncomeTax" class="required number" minlength="1">
+						</div>
+					</div>
+					<div class="right-column">
+						<h3>Assets</h3>
+						<div class="form-field">
+							<label for="i-studentRegularAssets" class="field-title">Regular assets</label>
+							<label for="i-studentRegularAssets" class="note">Total assets in cash and savings or checking accounts</label>
+							$<input type="text" id="i-studentRegularAssets" name="studentRegularAssets" class="required number" minlength="1">
+						</div>
+						<div class="form-field">
+							<label for="i-studentInvestments" class="field-title">Investments</label>
+							<label for="i-studentInvestments" class="note">Net worth of investments, not including home</label>
+							$<input type="text" id="i-studentInvestments" name="studentInvestments" class="required number" minlength="1">
+						</div>
+						<div class="form-field">
+							<label for="i-studentBusinessesAndFarms" class="field-title">Businesses and farms</label>
+							<label for="i-studentBusinessesAndFarms" class="note">Net worth of businesses and investment farms</label>
+							$<input type="text" id="i-studentBusinessesAndFarms" name="studentBusinessesAndFarms" class="required number" minlength="1">
+						</div>
+					</div>
+				</div>
+			</form>
+			
+			<div class="international coolbox">
+				Because you are not a citizen or permanent resident of the United States, you can skip this step.
+			</div>
+		</div>
+		
+		<div class="slide" id="slide-merit">
+			<h2>Merit considerations</h2>
+			<form action="" class="coolbox">
+				
+				<div class="columns-container">
+					<div class="left-column">
+						<h3>SAT and ACT scores</h3>
+						
+						<div class="form-field">
+							Enter the highest score the student has earned on the SAT or ACT, if applicable.
+						</div>
+						
+						<div class="form-field">
+							<label for="i-satScore" class="field-title">SAT score</label>
+							<label for="i-satScore" class="note">Math + critical reading only</label>
+							<input type="text" id="i-satScore" name="satScore" class="number" min="400" max="1600"/>
+						</div>
+						<div class="form-field">
+							<label for="i-actScore" class="field-title">ACT composite score</label>
+							<input type="text" id="i-actScore" name="actScore" class="number" min="1" max="36"/>
+						</div>
+						
+											
+					</div>
+					<div class="right-column">
+						<h3>Other</h3>
+						
+						<div class="international form-field">
+							<label for="i-checkNationalContest" class="field-title">National Olympiads</label>
+							<input type="checkbox" id="i-checkNationalContest" name="checkNationalContest"/>
+							<label for="i-checkNationalContest" class="checkbox">
+								Check this box if the student has received an award in a national-level Olympiad.
+							</label> 
+						</div>
+						
+						<div class="form-field">
+							<label for="i-internationalContest" class="field-title">International competitions</label>
+							<label for="i-internationalContest" class="note">Has the student ever received an award in an international competition?</label>
+							<select id="i-internationalContest" name="internationalContest">
+								<option value="no">No</option>
+								<option value="olympiad">Yes, in an international Olympiad</option>
+								<option value="other">Yes, in another international competition</option>
+							</select>
+						</div>
+						
+						<div class="US form-field">
+							<label for="i-highSchoolClassTopPercent" class="field-title">Class rank</label>
+							<label for="i-highSchoolClassTopPercent">
+								The student graduated in the top
+								<input type="text" id="i-highSchoolClassTopPercent" name="highSchoolClassTopPercent" class="number" min="1" max="100" size="3"/>
+								percent of his/her high school class.
+							</label>
+						</div>
+						<div class="international form-field">
+							<label for="i-nationalExamTopPercent" class="field-title">National exams</label>
+							<label for="i-nationalExamTopPercent">
+								The student scored in the top
+								<input type="text" id="i-nationalExamTopPercent" name="nationalExamTopPercent" class="number" min="1" max="100" size="3"/>
+								percent on a national standardized exam for high school students.
+							</label>
+						</div>
+					</div>
+				</div>
+				
+		
+			</form>
+		</div>
+		
+		<div class="slide" id="slide-results">
+			<h2>Your calculated net price</h2>
+			
+			<div class="coolbox">
+				<table id="results-table">
+					<tr id="tr-tuitionAndFees">
+						<td>tuition and fees</td>
+						<td></td>
+					</tr>
+					<tr id="tr-roomAndBoard">
+						<td>room and board</td>
+						<td></td>
+					</tr>
+					<tr id="tr-booksAndSupplies">
+						<td>books and supplies</td>
+						<td></td>
+					</tr>
+					<tr id="tr-transportationAndOther">
+						<td>transportation and other personal expenses</td>
+						<td></td>
+					</tr>
+					<tr id="tr-costOfAttendance" class="subtotal">
+						<td>cost of attendance</td>
+						<td></td>
+					</tr>
+					<tr id="tr-federalGrant" class="negative">
+						<td>federal grants</td>
+						<td></td>
+					</tr>
+					<tr id="tr-federalLoan" class="negative">
+						<td>federal loans</td>
+						<td></td>
+					</tr>
+					<tr id="tr-nacAid" class="negative">
+						<td>NAC scholarships and grants</td>
+						<td></td>
+					</tr>
+					<tr id="tr-familyContribution" class="negative">
+						<td>student/family contribution</td>
+						<td></td>
+					</tr>
+					<tr id="tr-netPrice" class="total">
+						<td>remaining need</td>
+						<td></td>
+					</tr>
+				</table>
+				
+				<div id="results-pie-graph" style="width:600px;height:600px;">
+					
+				</div>
+			
+				100 percent of North American College freshmen receive institutional grants.
+			</div>
+			
+		</div>
+		
+		
+    </body>
+</html>
