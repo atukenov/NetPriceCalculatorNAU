@@ -1,5 +1,5 @@
 /*
- * This script is based on the document "The EFC Formula, 2011-2012" and 
+ * This script is based on the document "The EFC Formula, 2016-2017" and 
  * references page numbers in that document.
  */
 
@@ -135,7 +135,7 @@ Efc.getTableA1 = function (income) {
         bracket1 = {
                 AL: 3,
                 AK: 2,
-                AZ: 5,
+                AZ: 4,
                 AR: 4,
                 CA: 7,
                 CO: 4,
@@ -471,7 +471,7 @@ Efc.getEfc_regularWorksheetB = function () {
         
         // line 13
         if (FormInfo.hasSpouse()) {
-                lines[13] = Math.min( 0.35 * Math.min(studentWorkIncome, spouseWorkIncome), 3600 );
+                lines[13] = Math.min( 0.35 * Math.min(studentWorkIncome, spouseWorkIncome), 4000 );
         }
         else {
                 lines[13] = 0;
@@ -525,7 +525,7 @@ Efc.getTableB3 = function (worth) {
 // page 27
 Efc.getTableB4 = function () {
         var birthdate = FormInfo.getBirthdate();
-        var endOfYear = new Date(2012,12,31);
+        var endOfYear = new Date(2016,12,31);
         var millisecondsInYear = 1000 * 60 * 60 * 24 * 365.25;
         var age = Math.floor((birthdate.getTime() - endOfYear.getTime()) / millisecondsInYear);
         var isMarried = FormInfo.getSelectOption('marital') == 'married';

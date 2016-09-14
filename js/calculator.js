@@ -9,14 +9,14 @@ Calculator.calculate = function () {
 	
 	var tuitionAndFees = 11450;
 	var roomAndBoard;
-		if (housing == 'oncampus') roomAndBoard = 6600;
-		if (housing == 'other') roomAndBoard = 3242;
+		if (housing == 'oncampus') roomAndBoard = 8900;
+		if (housing == 'other') roomAndBoard = 3275;
 		if (housing == 'offcampus') roomAndBoard = 8084;
-	var booksAndSupplies = 1100;
+	var booksAndSupplies = 1122;
 	var transportationAndOther;
-		if (housing == 'oncampus') transportationAndOther = 984;
-		if (housing == 'offcampus') transportationAndOther = 2499;
-		if (housing == 'other') transportationAndOther = 2004;
+		if (housing == 'oncampus') transportationAndOther = 1031;
+		if (housing == 'offcampus') transportationAndOther = 2570;
+		if (housing == 'other') transportationAndOther = 2062;
 		
 	var costOfAttendance = tuitionAndFees + roomAndBoard + booksAndSupplies + transportationAndOther;
 	
@@ -29,7 +29,7 @@ Calculator.calculate = function () {
 	var nacAid = Math.round(NacAid.getNacAid(federalGrant));
 	remainingNeed -= nacAid;
 	
-	// in the rare case that NAC aid and the Pell grant together exceed the cost of attendance, the excess is cut off from the Pell grant
+	// in the rare case that NAU aid and the Pell grant together exceed the cost of attendance, the excess is cut off from the Pell grant
 	if (remainingNeed < 0) {
 		federalGrant += remainingNeed;
 		remainingNeed = 0;

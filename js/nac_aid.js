@@ -20,8 +20,8 @@ NacAid.getNacAid = function (pell) {
 }
 
 NacAid.scholarshipAmounts = {
-	foundation: 11000,
-	internationalMerit: 10950,
+	foundation: 11050,
+	internationalMerit: 12550,
 	president: 7000,
 	nac: 4000,
 	none: 0
